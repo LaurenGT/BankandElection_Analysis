@@ -21,6 +21,8 @@ def f(bank_data):
 
 # set total_months count to 0 at start of loops below
 total_months = 0
+# set total_pnl count to 0 at start of loops below
+total_pnl = 0
 
 # open csv, read csv with delimiter as comma and print the header row
 with open(pyBank_csv, newline='') as csv_file:
@@ -33,3 +35,7 @@ with open(pyBank_csv, newline='') as csv_file:
     for row in csv_reader:
         total_months += 1
         print(total_months)
+
+        #calculate total profit and losses (total_pnl) of data set
+        total_pnl = (total_pnl + int(row[1]))
+        print(total_pnl)
