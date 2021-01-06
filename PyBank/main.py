@@ -1,32 +1,30 @@
 # Create a Python script that analyzes the records to calculate each of the following
-    # Total number of months included in the dataset
-    # Net total amount of "Profit/Losses" over the entire period
-    # Changes in "Profit/Losses" over the period, then find the average of those changes
-    # Greatest increase in profits (date and amount) over the entire period
-    # Greatest decrease in losses (date and amount) over the entire period
+# Total number of months included in the dataset
+# Net total amount of "Profit/Losses" over the entire period
+# Changes in "Profit/Losses" over the period, then find the average of those changes
+# Greatest increase in profits (date and amount) over the entire period
+# Greatest decrease in losses (date and amount) over the entire period
 
-#Final script should both print the analysis to the terminal and export a text file with the results
+# Final script should both print the analysis to the terminal and export a text file with the results
 
-#import os and csv modules
+# import os and csv modules
 import os
 import csv
 
 # set file path for csv
-pyBank_csv = os.path.join("resources", "02-Homework_03-Python_PyBank_Resources_budget_data.csv")
+pyBank_csv = os.path.join(
+    "resources", "02-Homework_03-Python_PyBank_Resources_budget_data.csv")
 
-def f(bank_data):
-    #assign variable names
-    date = str(bank_data[0])
-    pnl = int(bank_data[1])
+# def f(bank_data):
+#     #assign variable names
+#     date = str(bank_data[0])
+#     pnl = int(bank_data[1])
 
 # set total_months count to 0 for start of loops below
 total_months = 0
 # set total_pnl count to 0 for start of loops below
 total_pnl = 0
-# set starting pnl difference to 0 for start of loops below
-# set a starting reference for previous row as 0 for start of loops below. Each loop will then reference the previous row accurately to calculate the difference between it and the current row the loop is on
-# pnl_change = 0
-# previous_row = 0
+
 
 # open csv, read csv with delimiter as comma and print the header row
 with open(pyBank_csv, newline='') as csv_file:
@@ -34,22 +32,27 @@ with open(pyBank_csv, newline='') as csv_file:
 
     csv_header = next(csv_file)
     print(f"Header: {csv_header}")
-    
+
+    # set starting pnl difference to 0 for start of loops below
+    # set a starting reference for previous row as 0 for start of loops below. Each loop will then reference the previous row accurately to calculate the difference between it and the current row the loop is on
     pnl_change = 0
-    previous_row = 0
-    #calculate total months in data set by looping through rows and adding 1 each time
+    previous_row = 867884
+
+    # calculate total months in data set by looping through rows and adding 1 each time
     for row in csv_reader:
         total_months += 1
         print(total_months)
 
-        #calculate total profit and losses (total_pnl) of data set
+        # calculate total profit and losses (total_pnl) of data set
         total_pnl = (total_pnl + int(row[1]))
         print(total_pnl)
 
-        #calculate changes in pnl over data set and find average
-        #find difference in pnl value between each row
-        pnl_change = (int(row[1]) - int(previous_row))
+        # calculate changes in pnl over data set and find average
+        # find difference in pnl value between each row
+        pnl_change = (int(row[1]) - previous_row)
         print(pnl_change)
-    
-        #sets new previous row reference value for calculation of pnl_change
+
+        # is there a better way of doing this, or will this suffice for the purpose of the homework, setting the intitital previous_row to equal the value of the first month's pnl?
+
+        # sets new previous row reference value for calculation of pnl_change
         previous_row = int(row[1])
