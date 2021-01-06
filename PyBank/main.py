@@ -62,3 +62,7 @@ with open(pyBank_csv, newline='') as csv_file:
 
         # sets new previous row reference value for calculation of pnl_change
         previous_row = int(row[1])
+    
+    #calculate ave_pnl_changes over data set
+    ave_pnl_changes = int(all_pnl_changes) / len(int(total_months))
+    print(ave_pnl_changes)
