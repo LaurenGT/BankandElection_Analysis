@@ -25,7 +25,8 @@ total_months = 0
 # set total_pnl count to 0 for start of loops below
 total_pnl = 0
 
-
+# capture all pnl changes
+all_pnl_changes = []
 # open csv, read csv with delimiter as comma and print the header row
 with open(pyBank_csv, newline='') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
@@ -51,8 +52,13 @@ with open(pyBank_csv, newline='') as csv_file:
         # find difference in pnl value between each row
         pnl_change = (int(row[1]) - previous_row)
         print(pnl_change)
+        # append all_pnl_changes list to use pull average later
+        all_pnl_changes.append(pnl_change)
+        print(all_pnl_changes)
 
         # is there a better way of doing this, or will this suffice for the purpose of the homework, setting the intitital previous_row to equal the value of the first month's pnl?
+
+        # calculate average pnl_change
 
         # sets new previous row reference value for calculation of pnl_change
         previous_row = int(row[1])
