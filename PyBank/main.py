@@ -70,12 +70,14 @@ with open(pyBank_csv, newline='') as csv_file:
         # ave_pnl_changes = sum(all_pnl_changes) / len(pnl_change)
         # print(ave_pnl_changes)
 
-        # Greatest increase in profits (date and amount) over the entire period
-        # greatest_increase = max(all_pnl_changes)
-        # print(greatest_increase)
-            
-        # greatest_decrease = min(all_pnl_changes)
-        # print(greatest_decrease)
+        ## Use .index to compare the values in lists
+
+        # Identify month associated with greatest increase value
+        month_greatest_increase = all_pnl_changes.index(max(all_pnl_changes))
+
+        # Identify month associated with greatest decrease value 
+        month_greatest_decrease = all_pnl_changes.index(min(all_pnl_changes))
+
 
     print(f"Total Months: {len(total_months)}")
     print(f"Total Profits and Losses: {sum(net_pnl)}")
@@ -83,5 +85,7 @@ with open(pyBank_csv, newline='') as csv_file:
     print(f"Greatest Monthly Decrease: {min(all_pnl_changes)}")
     ## print(all_pnl_changes)
     print(f"Average Monthly Change: {sum(all_pnl_changes)/len(all_pnl_changes)}")
+    print(month_greatest_increase)
+    print(month_greatest_decrease)
 
     
