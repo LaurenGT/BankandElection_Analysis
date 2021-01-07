@@ -42,8 +42,9 @@ with open(pyPoll_csv, newline = '') as election_data:
         # have: list of unique candidates
         # need: dictionary of votes per candidate on list
         #need to add candidate to dictionary of votes for each candidate
-        if candidate_name in unique_candidates:
-            candidate_votes[candidate_name] + 1
+        # tried just +, did not work
+        #referenced https://stackoverflow.com/questions/823561/what-does-mean-in-python/823878 to understand the use of += in this case
+        candidate_votes[candidate_name] += 1
 
     print(total_votes)
     print(unique_candidates)
