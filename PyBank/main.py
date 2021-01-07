@@ -37,9 +37,11 @@ with open(pyBank_csv, newline='') as csv_file:
     csv_header = next(csv_file)
     print(f"Header: {csv_header}")
 
+    january = next(csv_reader)
+    print(january)
     # set starting pnl difference to 0 for start of loops below
     # set a starting reference for previous row as 0 for start of loops below. Each loop will then reference the previous row accurately to calculate the difference between it and the current row the loop is on
-    pnl_change = 0
+    # pnl_change = 0
     previous_row = 867884
 
     # calculate total months in data set by looping through rows and adding 1 each time
@@ -73,19 +75,21 @@ with open(pyBank_csv, newline='') as csv_file:
         ## Use .index to compare the values in lists
 
         # Identify month associated with greatest increase value
-        month_greatest_increase = all_pnl_changes.index(max(all_pnl_changes))
+    month_greatest_increase = all_pnl_changes.index(max(all_pnl_changes))
 
         # Identify month associated with greatest decrease value 
-        month_greatest_decrease = all_pnl_changes.index(min(all_pnl_changes))
+    month_greatest_decrease = all_pnl_changes.index(min(all_pnl_changes))
 
 
-    print(f"Total Months: {len(total_months)}")
-    print(f"Total Profits and Losses: {sum(net_pnl)}")
-    print(f"Greatest Monthly Increase: {max(all_pnl_changes)}")
-    print(f"Greatest Monthly Decrease: {min(all_pnl_changes)}")
+    print(f"Total Months: {len(total_months)+1}")
+    print(f"Total Profits and Losses: {sum(net_pnl)+int(january[1])}")
+    print(f"Greatest Monthly Increase: {total_months[month_greatest_increase]} ({max(all_pnl_changes)})")
+    print(f"Greatest Monthly Decrease: {total_months[month_greatest_decrease]} ({min(all_pnl_changes)})")
     ## print(all_pnl_changes)
     print(f"Average Monthly Change: {sum(all_pnl_changes)/len(all_pnl_changes)}")
-    print(month_greatest_increase)
-    print(month_greatest_decrease)
+    # print(total_months[month_greatest_increase])
+    # print(total_months[month_greatest_decrease])
 
-    
+#to get the month name for increase:    
+#print(total_months[month_greatest_increase])
+#print(total_months[month_greatest_increase])
