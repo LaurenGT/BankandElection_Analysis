@@ -35,10 +35,10 @@ with open(pyBank_csv, newline='') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
 
     csv_header = next(csv_file)
-    print(f"Header: {csv_header}")
+    # print(f"Header: {csv_header}")
 
     january = next(csv_reader)
-    print(january)
+    # print(january)
     # set starting pnl difference to 0 for start of loops below
     # set a starting reference for previous row as 0 for start of loops below. Each loop will then reference the previous row accurately to calculate the difference between it and the current row the loop is on
     # pnl_change = 0
@@ -81,15 +81,10 @@ with open(pyBank_csv, newline='') as csv_file:
     month_greatest_decrease = all_pnl_changes.index(min(all_pnl_changes))
 
 
+    print("Financial Analysis")
+    print("--------------------------")
     print(f"Total Months: {len(total_months)+1}")
-    print(f"Total Profits and Losses: {sum(net_pnl)+int(january[1])}")
-    print(f"Greatest Monthly Increase: {total_months[month_greatest_increase]} ({max(all_pnl_changes)})")
-    print(f"Greatest Monthly Decrease: {total_months[month_greatest_decrease]} ({min(all_pnl_changes)})")
-    ## print(all_pnl_changes)
-    print(f"Average Monthly Change: {sum(all_pnl_changes)/len(all_pnl_changes)}")
-    # print(total_months[month_greatest_increase])
-    # print(total_months[month_greatest_decrease])
-
-#to get the month name for increase:    
-#print(total_months[month_greatest_increase])
-#print(total_months[month_greatest_increase])
+    print(f"Total Profits and Losses: ${sum(net_pnl)+int(january[1])}")
+    print(f"Greatest Monthly Increase: {total_months[month_greatest_increase]} (${max(all_pnl_changes)})")
+    print(f"Greatest Monthly Decrease: {total_months[month_greatest_decrease]} (${min(all_pnl_changes)})")
+    print(f"Average Monthly Change: ${round(sum(all_pnl_changes)/len(all_pnl_changes),0}")
