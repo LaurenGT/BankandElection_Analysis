@@ -7,29 +7,48 @@
 import os
 import csv
 
-total_voter_id = []
+#set total_votes tracker to 0 for start of loop
+total_votes=0
 unique_candidates = []
+candidate_votes = {}
+# dictionary needs to include candidate_name: "", candidate_votes:
 
 # set file path for csv
 pyPoll_csv = os.path.join("resources","02-Homework_03-Python_PyPoll_Resources_election_data.csv")
 
-with open(pyPoll_csv, newline = '') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter = ",")
+with open(pyPoll_csv, newline = '') as election_data:
+    csv_reader = csv.reader(election_data, delimiter = ",")
 
     #skip header row
-    csv_header = next(csv_file)
+    csv_header = next(election_data)
     print(csv_header)
 
     for row in csv_reader:
+
+        # assign column index names for readibility
+        voter_id = row[0]
+        county_name = row[1]
+        candidate_name = row[2]
+
         #append total_votes list
-        total_voter_id.append(row[0])
+        total_votes= total_votes + 1
 
         #append unique_candidate list
-        if str(row[2]) not in unique_candidates:
-            unique_candidates.append(row[2])
+        if candidate_name not in unique_candidates:
+            unique_candidates.append(candidate_name)
+            candidate_votes[candidate_name] = 0
         
-    print(len(total_voter_id))
+        # find a way to create a dictionary and/or list that collects occurrences of candidate names and adds one to a vote count for each candidate
+        # have: list of unique candidates
+        # need: dictionary of votes per candidate on list
+        #need to add candidate to dictionary of votes for each candidate
+        if candidate_name in unique_candidates:
+            candidate_votes[candidate_name] + 1
+
+    print(total_votes)
     print(unique_candidates)
+    print(candidate_votes)
+    
 
 
 
