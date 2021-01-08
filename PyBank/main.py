@@ -80,11 +80,21 @@ with open(pyBank_csv, newline='') as csv_file:
         # Identify month associated with greatest decrease value 
     month_greatest_decrease = all_pnl_changes.index(min(all_pnl_changes))
 
+    # print()
+    # print("Financial Analysis")
+    # print("--------------------------")
+    # print(f"Total Months: {len(total_months)+1}")
+    # print(f"Total Profits and Losses: ${sum(net_pnl)+int(january[1])}")
+    # print(f"Average Monthly Change: ${round(sum(all_pnl_changes)/len(all_pnl_changes),0)}")
+    # print(f"Greatest Monthly Increase: {total_months[month_greatest_increase]} (${max(all_pnl_changes)})")
+    # print(f"Greatest Monthly Decrease: {total_months[month_greatest_decrease]} (${min(all_pnl_changes)})")
+    # print()
 
-    print("Financial Analysis")
-    print("--------------------------")
-    print(f"Total Months: {len(total_months)+1}")
-    print(f"Total Profits and Losses: ${sum(net_pnl)+int(january[1])}")
-    print(f"Greatest Monthly Increase: {total_months[month_greatest_increase]} (${max(all_pnl_changes)})")
-    print(f"Greatest Monthly Decrease: {total_months[month_greatest_decrease]} (${min(all_pnl_changes)})")
-    print(f"Average Monthly Change: ${round(sum(all_pnl_changes)/len(all_pnl_changes),0}")
+bank_results = (f"Financial Analysis\n----------\nTotal Months: {len(total_months)+1}\nTotal Profits and Losses: ${sum(net_pnl)+int(january[1])}\nAverage Monthly Change: ${round(sum(all_pnl_changes)/len(all_pnl_changes),0)}\nGreatest Monthly Increase: {total_months[month_greatest_increase]} (${max(all_pnl_changes)})\nGreatest Monthly Decrease: {total_months[month_greatest_decrease]} (${min(all_pnl_changes)})")
+
+print(bank_results)
+
+output_file = os.path.join("bank_results.txt")
+
+with open(output_file, "w") as txt_file:
+    txt_file.write(bank_results)
