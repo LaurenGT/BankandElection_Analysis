@@ -48,6 +48,7 @@ with open(pyPoll_csv, newline = '') as election_data:
     for candidate in candidate_votes:
         percentage_votes = candidate_votes.get(candidate)
         print(f"{candidate}: {round((percentage_votes/total_votes)*100,2)}% ({percentage_votes})")
+    
 
     # print remaining results
     print("--------------------")
@@ -55,6 +56,20 @@ with open(pyPoll_csv, newline = '') as election_data:
     print(f"Winner: {winning_votes}")
     print("---------------------")
 
+
+
+#set variable output file
+output_file = os.path.join("election_results.txt")
+
+with open(output_file, "w") as txt_file:
+
+    election_results = (
+        f"Election Results\n----------------\nTotal Votes: {total_votes}\n----------------\nVote Tally:\n{candidate_votes}\n----------------\nWinner: {winning_votes}\n----------------"
+    )
+    print(election_results)
+    txt_file.write(election_results)
+
+        
     
     
 
