@@ -45,11 +45,18 @@ with open(pyPoll_csv, newline = '') as election_data:
         percentage_votes = candidate_votes.get(candidate)
         print(f"{candidate}: {round((percentage_votes/total_votes)*100,2)}% ({percentage_votes})")
 
+    winning_votes = max(candidate_votes, key=candidate_votes.get)
+    print(f"Winner: {winning_votes}")
+
+        # voting_numbers = candidate_votes.values()
+        # winning_votes = max(voting_numbers)
+        # print(f"{candidate} winning_votes")
 
     print(total_votes)
     print(unique_candidates)
     print(candidate_votes)
     # print(percentage_votes)
+    
     
 
 
