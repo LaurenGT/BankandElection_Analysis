@@ -1,12 +1,3 @@
-# Create a Python script that analyzes the records to calculate each of the following
-# Total number of months included in the dataset
-# Net total amount of "Profit/Losses" over the entire period
-# Changes in "Profit/Losses" over the period, then find the average of those changes
-# Greatest increase in profits (date and amount) over the entire period
-# Greatest decrease in losses (date and amount) over the entire period
-
-# Final script should both print the analysis to the terminal and export a text file with the results
-
 # import os and csv modules
 import os
 import csv
@@ -15,17 +6,7 @@ import csv
 pyBank_csv = os.path.join(
     "resources", "02-Homework_03-Python_PyBank_Resources_budget_data.csv")
 
-# def f(bank_data):
-#     #assign variable names
-#     date = str(bank_data[0])
-#     pnl = int(bank_data[1])
-
-# set total_months count to 0 for start of loops below
-# total_months = 0
-# set total_pnl count to 0 for start of loops below
-# total_pnl = 0
-
-# capture all pnl changes in a dictionary and months in dictionary
+# set up lists to store data from loops below
 all_pnl_changes = []
 total_months = []
 net_pnl = []
@@ -34,67 +15,44 @@ net_pnl = []
 with open(pyBank_csv, newline='') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
 
+    # skip header row to start data looping at first month of data
     csv_header = next(csv_file)
-    # print(f"Header: {csv_header}")
 
+    # skip first month to avoid miscalculation of average changes
     january = next(csv_reader)
-    # print(january)
-    # set starting pnl difference to 0 for start of loops below
-    # set a starting reference for previous row as 0 for start of loops below. Each loop will then reference the previous row accurately to calculate the difference between it and the current row the loop is on
-    # pnl_change = 0
-    previous_row = 867884
+    
+    #set initial previous row to first month of data
+    previous_row = int(january[1])
 
-    # calculate total months in data set by looping through rows and adding 1 each time
+    # loop through data set and store all values in lists for later calculations
     for row in csv_reader:
+        # append lists for later calculations
         total_months.append(row[0])
-        # total_months += 1
-        # print(total_months)
-
-        # calculate total profit and losses (total_pnl) of data set
-        # net_pnl = (net_pnl + int(row[1]))
-        # print(total_pnl)
         net_pnl.append(int(row[1]))
 
-        # calculate changes in pnl over data set and find average
         # find difference in pnl value between each row
         pnl_change = (int(row[1]) - previous_row)
-        # print(pnl_change)
-        # append all_pnl_changes list to use pull average later
+        # append all_pnl_changes list for later calculations
         all_pnl_changes.append(pnl_change)
-        # print(all_pnl_changes)
-
-        # is there a better way of doing this, or will this suffice for the purpose of the homework, setting the intitital previous_row to equal the value of the first month's pnl?
 
         # sets new previous row reference value for calculation of pnl_change
         previous_row = int(row[1])
-    
-        #calculate ave_pnl_changes over data set
-        # ave_pnl_changes = sum(all_pnl_changes) / len(pnl_change)
-        # print(ave_pnl_changes)
 
-        ## Use .index to compare the values in lists
-
-        # Identify month associated with greatest increase value
+    # Identify month associated with greatest increase value from appended lists
     month_greatest_increase = all_pnl_changes.index(max(all_pnl_changes))
 
-        # Identify month associated with greatest decrease value 
+    # Identify month associated with greatest decrease value from appended lists
     month_greatest_decrease = all_pnl_changes.index(min(all_pnl_changes))
 
-    # print()
-    # print("Financial Analysis")
-    # print("--------------------------")
-    # print(f"Total Months: {len(total_months)+1}")
-    # print(f"Total Profits and Losses: ${sum(net_pnl)+int(january[1])}")
-    # print(f"Average Monthly Change: ${round(sum(all_pnl_changes)/len(all_pnl_changes),0)}")
-    # print(f"Greatest Monthly Increase: {total_months[month_greatest_increase]} (${max(all_pnl_changes)})")
-    # print(f"Greatest Monthly Decrease: {total_months[month_greatest_decrease]} (${min(all_pnl_changes)})")
-    # print()
+# assign variable with financial analysis results to reference in a print statement to terminal and print in text file
+bank_results = (f"Financial Analysis\n----------\nTotal Months: {len(total_months)+1}\nTotal Profits and Losses: ${sum(net_pnl)+int(january[1])}\nAverage Monthly Change: ${round(sum(all_pnl_changes)/len(all_pnl_changes),2)}\nGreatest Monthly Increase: {total_months[month_greatest_increase]} (${max(all_pnl_changes)})\nGreatest Monthly Decrease: {total_months[month_greatest_decrease]} (${min(all_pnl_changes)})")
 
-bank_results = (f"Financial Analysis\n----------\nTotal Months: {len(total_months)+1}\nTotal Profits and Losses: ${sum(net_pnl)+int(january[1])}\nAverage Monthly Change: ${round(sum(all_pnl_changes)/len(all_pnl_changes),0)}\nGreatest Monthly Increase: {total_months[month_greatest_increase]} (${max(all_pnl_changes)})\nGreatest Monthly Decrease: {total_months[month_greatest_decrease]} (${min(all_pnl_changes)})")
-
+# print to terminal
 print(bank_results)
 
+# create new text file with analysis results
 output_file = os.path.join("bank_results.txt")
 
+#write analysis results to new text file
 with open(output_file, "w") as txt_file:
     txt_file.write(bank_results)
