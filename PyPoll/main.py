@@ -9,10 +9,10 @@ import csv
 
 #set total_votes tracker to 0 for start of loop
 total_votes=0
+
 unique_candidates = []
 candidate_votes = {}
-# dictionary needs to include candidate_name: "", candidate_votes:
-
+# printed as 'Name' : vote count
 # set file path for csv
 pyPoll_csv = os.path.join("resources","02-Homework_03-Python_PyPoll_Resources_election_data.csv")
 
@@ -38,17 +38,18 @@ with open(pyPoll_csv, newline = '') as election_data:
             unique_candidates.append(candidate_name)
             candidate_votes[candidate_name] = 0
         
-        # find a way to create a dictionary and/or list that collects occurrences of candidate names and adds one to a vote count for each candidate
-        # have: list of unique candidates
-        # need: dictionary of votes per candidate on list
-        #need to add candidate to dictionary of votes for each candidate
-        # tried just +, did not work
-        #referenced https://stackoverflow.com/questions/823561/what-does-mean-in-python/823878 to understand the use of += in this case
         candidate_votes[candidate_name] += 1
+    
+    # pull the candidate votes out of the cadidate dictionary and calculate the percentage of the total votes
+    for candidate in candidate_votes:
+        percentage_votes = candidate_votes.get(candidate)
+        print(f"{candidate}: {round((percentage_votes/total_votes)*100,2)}% ({percentage_votes})")
+
 
     print(total_votes)
     print(unique_candidates)
     print(candidate_votes)
+    # print(percentage_votes)
     
 
 
