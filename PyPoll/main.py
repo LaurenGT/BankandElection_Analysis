@@ -1,10 +1,9 @@
-
+# import necessary modules
 import os
 import csv
 
-#set total_votes tracker to 0 for start of loop
+# set total_votes tracker to 0 for start of loop
 total_votes=0
-
 # list to store unique candidate names as iterating through loops
 unique_candidates = []
 # dictionary to store vote tallies per candidate as iterating through loops
@@ -13,10 +12,11 @@ candidate_votes = {}
 # set file path for csv
 pyPoll_csv = os.path.join("resources","02-Homework_03-Python_PyPoll_Resources_election_data.csv")
 
+# open and perform analysis on election data file
 with open(pyPoll_csv, newline = '') as election_data:
     csv_reader = csv.reader(election_data, delimiter = ",")
 
-    #skip header row
+    #skip/store header row to start data looping row index 1
     csv_header = next(election_data)
     
     # start looping through rows to collect data
@@ -56,15 +56,15 @@ with open(pyPoll_csv, newline = '') as election_data:
     print(f"Winner: {winning_votes}")
     print("---------------------")
 
-# election_results = (f"Election Results\n----------------\nTotal Votes: {total_votes}\n----------------\nVote Tally:\n{candidate_votes}\n----------------\nWinner: {winning_votes}\n----------------")
-
-#set variable output file
+#set variable output file and create new text document
 output_file = os.path.join("election_results.txt")
 
+# open and write to the new text document
 with open(output_file, "w") as txt_file:
     
     txt_file.write(f"Election Results\n----------\nTotal Votes: {total_votes}\n----------\nVote Tally:\n")
 
+    #loop through dictionary to print line by line each key value pair and add calculation for percentage of votes
     for candidate in candidate_votes:
         percentage_votes = candidate_votes.get(candidate)
         txt_file.write(f"{candidate}: {round((percentage_votes/total_votes)*100,2)}% ({percentage_votes})\n")
