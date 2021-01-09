@@ -1,4 +1,4 @@
-# import os and csv modules
+# import necessary modules
 import os
 import csv
 
@@ -11,14 +11,14 @@ all_pnl_changes = []
 total_months = []
 net_pnl = []
 
-# open csv, read csv with delimiter as comma and print the header row
+# open and perform analysis on election data file
 with open(pyBank_csv, newline='') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
 
-    # skip header row to start data looping at first month of data
+    # skip/store header row to start data looping at first month of data
     csv_header = next(csv_file)
 
-    # skip first month to avoid miscalculation of average changes
+    # skip/store first month to avoid miscalculation of average changes
     january = next(csv_reader)
     
     #set initial previous row to first month of data
