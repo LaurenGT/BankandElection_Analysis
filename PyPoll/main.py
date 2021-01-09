@@ -39,7 +39,7 @@ with open(pyPoll_csv, newline = '') as election_data:
 
     # print election results available from this iterative loop
     print("Election Results")
-    print("--------------------")
+    print("---------------")
     print(F"Total Votes: {total_votes}")
     print("--------------------")
     print(f"Vote Tally:")
@@ -56,23 +56,18 @@ with open(pyPoll_csv, newline = '') as election_data:
     print(f"Winner: {winning_votes}")
     print("---------------------")
 
-
+# election_results = (f"Election Results\n----------------\nTotal Votes: {total_votes}\n----------------\nVote Tally:\n{candidate_votes}\n----------------\nWinner: {winning_votes}\n----------------")
 
 #set variable output file
 output_file = os.path.join("election_results.txt")
 
 with open(output_file, "w") as txt_file:
-
-    election_results = (
-        f"Election Results\n----------------\nTotal Votes: {total_votes}\n----------------\nVote Tally:\n{candidate_votes}\n----------------\nWinner: {winning_votes}\n----------------"
-    )
-    print(election_results)
-    txt_file.write(election_results)
-
-        
     
-    
+    txt_file.write(f"Election Results\n----------\nTotal Votes: {total_votes}\n----------\nVote Tally:\n")
 
+    for candidate in candidate_votes:
+        percentage_votes = candidate_votes.get(candidate)
+        txt_file.write(f"{candidate}: {round((percentage_votes/total_votes)*100,2)}% ({percentage_votes})\n")
 
-
-
+    winning_votes = max(candidate_votes, key=candidate_votes.get)
+    txt_file.write(f"----------\nWinner: {winning_votes}\n----------")
