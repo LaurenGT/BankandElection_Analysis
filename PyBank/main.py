@@ -51,7 +51,7 @@ bank_results = (f"Financial Analysis\n----------\nTotal Months: {len(total_month
 print(bank_results)
 
 # create new text file with analysis results
-output_file = os.path.join("bank_results.txt")
+output_file = os.path.join("analysis","bank_results.txt")
 
 #write analysis results to new text file
 with open(output_file, "w") as txt_file:
