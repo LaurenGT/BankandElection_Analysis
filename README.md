@@ -1,4 +1,4 @@
-# BankandElection_Analysis
+# Bank and Election Data Analysis
 
 Above are folders housing bank data (PyBank) and election data (PyPoll).
 Within each foler there is a resource folder containing the source data.
