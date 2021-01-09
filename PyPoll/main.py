@@ -57,7 +57,7 @@ with open(pyPoll_csv, newline = '') as election_data:
     print("---------------------")
 
 #set variable output file and create new text document
-output_file = os.path.join("election_results.txt")
+output_file = os.path.join("analysis","election_results.txt")
 
 # open and write to the new text document
 with open(output_file, "w") as txt_file:
